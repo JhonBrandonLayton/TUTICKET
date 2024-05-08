@@ -3,22 +3,20 @@ name: Api Key Secreta
 on:
   push:
     branches: [ "master" ]
-
   workflow_dispatch:
 
 jobs:
-
   build:
     env:
       apiKey: ${{secrets.API_KEY_FIREBASE}}
     runs-on: ubuntu-latest
 
-
     steps:
       - name: Valor secreto de api key
-      - run: |
+        run: |
           echo "Valor API: ${{env.apiKey}}"
 
       - name: Validar valor
         if: ${{env.apiKey != ''}}
         run: echo "La apiKey esta guardada correctamente"
+
