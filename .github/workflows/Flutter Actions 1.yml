@@ -1,0 +1,34 @@
+name: Test Unitario  
+
+on:
+  push:
+    branches: [ master ]  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+
+    steps:  
+      # verificar repo
+      - uses: actions/checkout@v2  
+
+      - name: Set up Java  # Configurar Java
+        uses: actions/setup-java@v2  
+        with:
+          java-version: 11  
+          distribution: 'adopt'  
+
+      - name: Cache Gradle packages  
+        uses: actions/cache@v2  # Acción para cachear los paquetes
+        with:
+          path: ~/.gradle/caches  # Ruta donde se almacenarán los paquetes de Gradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle') }}  # Clave única para identificar la caché
+          restore-keys: |
+            ${{ runner.os }}-gradle-  # Claves de restauración para recuperar la caché
+
+      - name: Grant execute permissions for gradlew  
+        run: chmod +x gradlew  # Otorgar permisos de ejecución a gradlew
+
+      - name: Run Unit Tests  
+        run: ./gradlew test  # Comando para ejecutar las pruebas unitarias utilizando Gradle
+
