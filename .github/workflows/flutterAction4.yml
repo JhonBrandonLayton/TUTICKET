@@ -18,6 +18,9 @@ jobs:
         with:
           java-version: 22.0.1+8
           distribution: 'adopt'
+      
+      - name: Otorgar permisos de ejecución a gradlew
+        run: chmod +x gradlew
 
       - name: Construir proyecto
         run: ./gradlew build
