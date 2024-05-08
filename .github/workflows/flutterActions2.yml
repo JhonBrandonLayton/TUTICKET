@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Valor secreto de api key
       - run: |
-          echo: "Valor API: ${{env.apiKey}}"
+          echo "Valor API: ${{env.apiKey}}"
 
       - name: Validar valor
         if: ${{env.apiKey != ''}}
