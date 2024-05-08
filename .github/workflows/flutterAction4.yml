@@ -1,0 +1,32 @@
+name: Empaquetar aplicación Kotlin
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar repo
+        uses: actions/checkout@v3
+
+      - name: Configurar Kotlin 1.8.0
+        uses: actions/setup-java@v3
+        with:
+          java-version: 1.8.0
+
+      - name: Construir proyecto
+        run: ./gradlew build
+
+      - name: Paquetes app
+        run: ./gradlew package
+
+      - name: Configurar artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: crear app.jar
+          path: build/libs/kotlin-app.jar
+
