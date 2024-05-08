@@ -1,0 +1,30 @@
+name: Pruebas en diferentes versiones de Kotlin y SO
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  test-matrix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        kotlin-version: [ 1.7.20, 1.8.0, 1.9.0 ]
+
+    steps:
+      - name: Verificar repo
+        uses: actions/checkout@v3
+
+      - name: Configurar kotlin ${{ matrix.kotlin-version }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.kotlin-version }}
+
+      - name: Construir el proyecto
+        run: ./gradlew build
+
+      - name: Hacer tests
+        run: ./gradlew test
+
