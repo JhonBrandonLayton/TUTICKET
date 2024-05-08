@@ -1,0 +1,21 @@
+name: ID proyecto Secreto
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    env:
+      id_proyecto: ${{secrets.ID_PROYECTO_FIREBASE}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Valor secreto de api key
+        run: |
+          echo "Valor ID Proyecto: ${{env.id_proyecto}}"
+
+      - name: Validar valor
+        if: ${{env.id_proyecto != ''}}
+        run: echo "El ID del proyecto esta guardado correctamente"
