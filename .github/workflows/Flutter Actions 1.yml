@@ -12,13 +12,13 @@ jobs:
       # verificar repo
       - uses: actions/checkout@v2  
 
-      - name: Set up Java  # Configurar Java
+      - name: Configurar java
         uses: actions/setup-java@v2  
         with:
           java-version: 17  
           distribution: 'adopt'  
 
-      - name: Cache Gradle packages  
+      - name: Cachear paquetes gradle  
         uses: actions/cache@v2  # Acción para cachear los paquetes
         with:
           path: ~/.gradle/caches  # Ruta donde se almacenarán los paquetes de Gradle
@@ -26,9 +26,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-  # Claves de restauración para recuperar la caché
 
-      - name: Grant execute permissions for gradlew  
-        run: chmod +x gradlew  # Otorgar permisos de ejecución a gradlew
+      - name: Otorgar permisos a gradle  
+        run: chmod +x gradlew  
 
-      - name: Run Unit Tests  
-        run: ./gradlew test  # Comando para ejecutar las pruebas unitarias utilizando Gradle
+      - name: Ejecutar tests unitarios 
+        run: ./gradlew test  
 
