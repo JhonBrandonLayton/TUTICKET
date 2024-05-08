@@ -21,6 +21,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.kotlin-version }}
+          distribution: 'adopt@hotspot'
 
       - name: Construir el proyecto
         run: ./gradlew build
