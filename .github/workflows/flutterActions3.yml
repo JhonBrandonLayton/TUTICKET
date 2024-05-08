@@ -1,0 +1,22 @@
+name: Link Base Datos Secreta
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    env:
+      link_bd: ${{secrets.URL_BASEDATOS_FIREBASE}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Valor secreto de la bse de datos
+        run: |
+          echo "Valor API: ${{env.link_bd}}"
+
+      - name: Validar valor base de datos
+        if: ${{env.link_bd != ''}}
+        run: echo "La url de la base de datos esta guardada correctamente"
+
